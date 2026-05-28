@@ -1,6 +1,7 @@
 package com.sky.controller.admin;
 
 import com.sky.constant.JwtClaimsConstant;
+import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
@@ -14,6 +15,7 @@ import com.sky.vo.EmployeeLoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -110,9 +112,61 @@ public class EmployeeController {
      */
     @PostMapping("/status/{status}")
     @ApiOperation("启用禁用员工账号")
-    public  Result startOrStop(@PathVariable Integer status,Long id){
+    public Result startOrStop(@PathVariable Integer status,Long id){
         log.info("启用禁用员工账号：{},{}",status,id);
         employeeService.startOrStop(status,id);
         return Result.success();
      }
+
+    /**
+     * 根据id查询员工
+     * @param id
+     * @return
+     */
+     @GetMapping("/{id}")
+     @ApiOperation("根据id查询员工")
+     public Result<Employee> getById(@PathVariable Long id){
+        log.info("根据id查询员工: {}",id);
+
+        Employee employee = employeeService.getById(id);
+
+        return Result.success(employee);
+
+     }
+
+    /**
+     * 编辑员工信息
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("编辑员工信息")
+    public Result update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("编辑员工信息: {}",employeeDTO);
+
+        employeeService.update(employeeDTO);
+
+        return Result.success();
+    }
+
+///*
+//    */
+///**
+//     * 修改密码
+//     * @param newPassword
+//     * @param oldPassword
+//     * @return
+//     *//*
+//
+//    @PutMapping("editPassword")
+//    @ApiOperation("修改密码")
+//    public Result password(String newPassword, String oldPassword){
+//        log.info("修改密码");
+//
+//        employeeService.password(newPassword,oldPassword);
+//
+//        return Result.success();
+//    }
+//*/
+
 }
