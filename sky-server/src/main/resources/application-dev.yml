@@ -6,3 +6,11 @@ sky:
     database: sky_take_out
     username: root
     password: mdxblsnt27
+  alioss:
+      endpoint: oss-cn-hangzhou.aliyuncs.com
+      access-key-id: LTAI5tPeFLzsPPT8gG3LPW64
+      access-key-secret: U6k1brOZ8gaOIXv3nXbulGTUzy6Pd7
+      bucket-name: sky-take-out
+file:
+  upload-dir: C:\Users\brian\Documents\Race\Java\sky-take-out-main\UploadFiles
+  access-url: http://localhost:8080/files/
