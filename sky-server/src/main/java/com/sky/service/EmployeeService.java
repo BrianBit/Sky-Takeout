@@ -50,10 +50,10 @@ public interface EmployeeService {
      */
     void update(EmployeeDTO employeeDTO);
 
-//    /**
-//     * 修改密码
-//     * @param newPassword
-//     * @param oldPassword
-//     */
-//    void password(String newPassword,String oldPassword);
+    /**
+     * 修改密码
+     * @param newPassword
+     * @param oldPassword
+     */
+    void password(String newPassword,String oldPassword);
 }

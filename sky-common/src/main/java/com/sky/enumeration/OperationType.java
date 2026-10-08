@@ -10,6 +10,7 @@ public enum OperationType {
      */
     UPDATE,
 
+    var,
     /**
      * 插入操作
      */

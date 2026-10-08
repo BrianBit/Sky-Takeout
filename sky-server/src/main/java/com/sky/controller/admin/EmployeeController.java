@@ -149,24 +149,25 @@ public class EmployeeController {
         return Result.success();
     }
 
-///*
-//    */
-///**
-//     * 修改密码
-//     * @param newPassword
-//     * @param oldPassword
-//     * @return
-//     *//*
-//
-//    @PutMapping("editPassword")
-//    @ApiOperation("修改密码")
-//    public Result password(String newPassword, String oldPassword){
-//        log.info("修改密码");
-//
-//        employeeService.password(newPassword,oldPassword);
-//
-//        return Result.success();
-//    }
-//*/
+
+    /**
+
+      * 修改密码
+      * @return
+      */
+
+     @PutMapping("editPassword")
+     @ApiOperation("修改密码")
+     public Result password(@RequestBody Map<String, String> map){
+         log.info("修改密码");
+
+         String oldPassword = map.get("oldPassword");
+         String newPassword = map.get("newPassword");
+
+         employeeService.password(newPassword,oldPassword);
+
+         return Result.success();
+     }
+
 
 }

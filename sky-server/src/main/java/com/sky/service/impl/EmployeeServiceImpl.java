@@ -81,12 +81,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         //账号初始化
         employee.setStatus(StatusConstant.ENABLE);
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
 
         //创建更新用户ID的识别 Done
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        employee.setCreateUser(BaseContext.getCurrentId());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
 
         employeeMapper.insert(employee);
     }
@@ -148,33 +148,34 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.update(employee);
     }
 
-//    /**
-//     * 修改密码
-//     * @param newPassword
-//     * @param oldPassword
-//     */
-//    public void password(String newPassword, String oldPassword) {
-//        Long empId = BaseContext.getCurrentId();
-//        Employee employee = employeeMapper.getById(empId);
-//
-//
-//        //处理各种异常情况（用户名不存在、密码不对、账号被锁定）
-//        if (employee == null) {
-//            //账号不存在
-//            throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
-//        }
-//        //密码比对
-//        if (!DigestUtils.md5DigestAsHex(oldPassword.getBytes()).equals(employee.getPassword())) {
-//            //密码错误
-//            throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
-//        }
-//
-//        employee = Employee.builder()
-//                .id(empId)
-//                .password(newPassword)
-//                .build();
-//        employeeMapper.update(employee);
-//    }
+    /**
+     * 修改密码
+     * @param newPassword
+     * @param oldPassword
+     */
+    public void password(String newPassword, String oldPassword) {
+        Long empId = BaseContext.getCurrentId();
+        Employee employee = employeeMapper.getById(empId);
+
+
+        //处理各种异常情况（用户名不存在、密码不对、账号被锁定）
+        if (employee == null) {
+            //账号不存在
+            throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
+        }
+        //密码比对
+        if (!DigestUtils.md5DigestAsHex(oldPassword.getBytes()).equals(employee.getPassword())) {
+            //密码错误
+            throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
+        }
+
+        employee = Employee.builder()
+                .id(empId)
+                .password(newPassword)
+                .build();
+
+        employeeMapper.update(employee);
+    }
 
 
 }
